@@ -6,7 +6,7 @@ class Controller:
         pygame.init()
 
         self.WHITE = (255, 255, 255)
-        self.BLACK = (0, 0, 0)
+        self.BLACK = (255, 0, 0)
         self.GRAY = (200, 200, 200)
 
         self.show_people = False
