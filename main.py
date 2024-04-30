@@ -6,7 +6,8 @@ class Controller:
         pygame.init()
 
         self.WHITE = (255, 255, 255)
-        self.BLACK = (255, 0, 0)
+        self.RED = (255, 0, 0)
+        self.BLACK = (0, 0, 0)
         self.GRAY = (200, 200, 200)
 
         self.show_people = False
@@ -28,7 +29,7 @@ class Controller:
         self.font = pygame.font.Font(None, 36)
 
         wrapped_text = "Your goal is to pay for your loans.\nYou can gain your balance by clicking on the\nx10 button every 10 clicks for a person. You\nhave to pay all of your loans before the timer\nruns out."
-        self.text_surface = self.font.render(wrapped_text, True, self.BLACK)
+        self.text_surface = self.font.render(wrapped_text, True, self.RED)
         self.new_surface = pygame.transform.smoothscale(self.text_surface, (550, 150))
         self.text_rect = self.new_surface.get_rect(center=(self.WIDTH//2, self.HEIGHT//2 + 80))
 
@@ -60,8 +61,8 @@ class Controller:
         self.loan_amount = 150000
         self.show_loans = False
         self.stop_gaining_balance = False
-        self.loan_text = self.font.render("Loans: ${} (Balance: ${})".format(self.loan_amount, self.loan_balance), True, self.BLACK)
-        self.people_text = self.font.render("x{}".format(self.people), True, self.BLACK)
+        self.loan_text = self.font.render("Loans: ${} (Balance: ${})".format(self.loan_amount, self.loan_balance), True, self.RED)
+        self.people_text = self.font.render("x{}".format(self.people), True, self.RED)
         self.people_rect = self.people_text.get_rect(topleft=(10, 55))  # Adjusted to go down a bit
         self.loan_rect = self.loan_text.get_rect(topleft=(10, 10))
 
@@ -69,7 +70,7 @@ class Controller:
         self.continue_timer = False
         self.timer_value = 420
         self.show_timer = False
-        self.timer_text = self.timer_font.render("Timer: {}:{}{}".format(self.timer_value // 60, str(self.timer_value % 60).zfill(2), "s"), True, self.BLACK)
+        self.timer_text = self.timer_font.render("Timer: {}:{}{}".format(self.timer_value // 60, str(self.timer_value % 60).zfill(2), "s"), True, self.RED)
         self.timer_rect = self.timer_text.get_rect(topright=(self.WIDTH - 10, 10))
 
         self.play_button_text = self.font.render("Play", True, self.BLACK)
@@ -102,7 +103,7 @@ class Controller:
         self.people = 0
         self.loan_balance = 0
         wrapped_text = "Your goal is to pay for your loans.\nYou can gain your balance by clicking on the\nx10 button every 10 clicks for a person. You\nhave to pay all of your loans before the timer\nruns out."
-        self.text_surface = self.font.render(wrapped_text, True, self.BLACK)
+        self.text_surface = self.font.render(wrapped_text, True, self.RED)
         self.new_surface = pygame.transform.smoothscale(self.text_surface, (550, 150))
         self.text_rect = self.new_surface.get_rect(center=(self.WIDTH//2, self.HEIGHT//2 + 80))
         self.play_button = pygame.Rect(self.WIDTH//2 - 50, self.HEIGHT//2 - 50, 100, 50)
@@ -161,7 +162,7 @@ class Controller:
                         self.bottom_button_clicked += 1
                         if self.bottom_button_clicked % 10 == 0:
                             self.people += 1
-                            self.people_text = self.font.render("x{}".format(self.people), True, self.BLACK)
+                            self.people_text = self.font.render("x{}".format(self.people), True, self.RED)
                     elif self.pay_button.collidepoint(event.pos):
                         if self.loan_balance > 0:
                             self.loan_amount -= self.loan_balance
@@ -192,11 +193,11 @@ class Controller:
                 self.screen.blit(self.pay_button_text, self.pay_button_text_rect)
 
             if self.text_surface.get_width() > 0:
-                pygame.draw.rect(self.screen, self.BLACK, self.text_rect, 2)
+                pygame.draw.rect(self.screen, self.RED, self.text_rect, 2)
                 self.screen.blit(self.text_surface, self.text_rect)
 
             if self.show_loans:
-                self.loan_text = self.font.render("Loans: ${} (Balance: ${})".format(self.loan_amount, self.loan_balance), True, self.BLACK)
+                self.loan_text = self.font.render("Loans: ${} (Balance: ${})".format(self.loan_amount, self.loan_balance), True, self.RED)
                 self.screen.blit(self.loan_text, self.loan_rect)
             
             if self.show_people:
@@ -208,7 +209,7 @@ class Controller:
                 self.screen.blit(self.people_text, (stick_figure_x + self.stick_figure.get_width() + 10, stick_figure_y))  # Adjusted for spacing
 
             if self.show_timer and self.continue_timer:
-                self.timer_text = self.timer_font.render("Timer: {}:{}{}".format(self.timer_value // 60, str(self.timer_value % 60).zfill(2), "s"), True, self.BLACK)
+                self.timer_text = self.timer_font.render("Timer: {}:{}{}".format(self.timer_value // 60, str(self.timer_value % 60).zfill(2), "s"), True, self.RED)
                 self.screen.blit(self.timer_text, self.timer_rect)
             
             if self.show_popup:
